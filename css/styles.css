@@ -29,6 +29,10 @@ ul {
     gap: 24px;
 }
 
+.gallery-link {
+    cursor: url('../svg/paw.svg'), auto;
+}
+
 .gallery-image {
     width: 360px;
     height: 200px;
