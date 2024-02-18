@@ -70,7 +70,7 @@ const elemGallary = images
   .map(
     image =>
       `<li class="gallery-item">
-    <a class="gallery-link" href="${image.original}}">
+    <a class="gallery-link" href="${image.original}">
       <img
         class="gallery-image"
         src="${image.preview}"
@@ -86,27 +86,27 @@ gallery.insertAdjacentHTML('afterbegin', elemGallary);
 
 gallery.addEventListener('click', handleGallery);
 
-function handleGallery() {
+function handleGallery(event) {
   event.preventDefault();
-  if (event.target.dataset.source === undefined) {
-  } else {
-    const instance = basicLightbox.create(
-      `
-    <img src="${event.target.dataset.source}">
-`,
-      {
-        onClose: instance => {
-          document.removeEventListener('keydown', closeInst);
-        },
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+  const instance = basicLightbox.create(
+    `
+      <img src="${event.target.dataset.source}">
+  `,
+    {
+      onClose: instance => {
+        document.removeEventListener('keydown', closeInst);
       },
-    );
+    },
+  );
 
-    instance.show(() => document.addEventListener('keydown', closeInst));
+  instance.show(() => document.addEventListener('keydown', closeInst));
 
-    function closeInst() {
-      if (event.code === 'Escape') {
-        instance.close();
-      }
+  function closeInst() {
+    if (event.code === 'Escape') {
+      instance.close();
     }
   }
 }
