@@ -92,9 +92,9 @@ function handleGallery(event) {
     return;
   }
   const instance = basicLightbox.create(
-    `
-      <img src="${event.target.dataset.source}">
-  `,
+    `<img src="${
+      event.target.dataset.source
+    }" alt ="${event.target.getAttribute('alt')}">`,
     {
       onClose: instance => {
         document.removeEventListener('keydown', closeInst);
@@ -104,7 +104,7 @@ function handleGallery(event) {
 
   instance.show(() => document.addEventListener('keydown', closeInst));
 
-  function closeInst() {
+  function closeInst(event) {
     if (event.code === 'Escape') {
       instance.close();
     }
